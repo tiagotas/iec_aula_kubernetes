@@ -7,7 +7,7 @@
 # 6) alterar o número de réplicas para 15 e rode: kubectl apply -f replicaset.yaml && watch 'kubectl get pod'
 # 7) kubectl port-forward pod/meu-replicaset-4qjkb 5001:5000
 # 8) kubectl delete replicaset meu-replicaset
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: ReplicaSet 
 metadata: 
   name: meu-replicaset
