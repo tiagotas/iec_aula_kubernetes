@@ -1,0 +1,45 @@
+# Kubernetes Deployment para o projeto de conversão de distância
+# 1) kubectl api-resource
+# 2) kubectl apply -f deployment.yaml && watch 'kubectl get pod'
+# 3) kubectl port-forward pod/meu-deploy-697c4dbc9d-gz4ds 5001:5000
+# 4) kubectl get deploy
+# 5) kubectl describe deployment meu-deploy
+# 6) kubectl delete deployment meu-deploy
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: meu-deploy
+spec:
+  replicas: 15
+  selector:
+    matchLabels:
+      app: meu-conversao-distancia
+  template:
+    metadata:
+      labels:
+        app: meu-conversao-distancia
+    spec:
+      containers:
+      - name: meu-container
+        image: tiagotas/conversao-distancia:latest
+        ports:
+        - containerPort: 5000
+---
+# Kubernetes Service para o projeto de conversão de distância
+# 1) kubectl apply -f deployment.yaml
+# 2) kubectl get service
+# 3) kubectl describe service meu-service
+# 4) kubectl port-forward service/meu-service 8080:5000 (8080 é a porta do pc hospedeiro e 5000 é a porta do serviço)
+# 5) kubectl delete service meu-service
+apiVersion: v1
+kind: Service
+metadata:
+  name: meu-service
+spec:
+  selector:
+    app: meu-conversao-distancia
+  ports:
+    - protocol: TCP
+      port: 5000 # porta do serviço
+      targetPort: 5000 # porta do container
+  type: LoadBalancer # ou NodePort, ClusterIP, etc.
