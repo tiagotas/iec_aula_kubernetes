@@ -5,14 +5,14 @@
 # 4) kubectl get rs
 # 5) kubectl describe replicaset meu-replicaset
 # 6) alterar o número de réplicas para 15 e rode: kubectl apply -f replicaset.yaml && watch 'kubectl get pod'
-# 7) kubectl port-forward pod/meu-replicaset-4qjkb 5001:5000
+# 7) kubectl port-forward pod/meu-replicaset-zjwkn 5001:5000
 # 8) kubectl delete replicaset meu-replicaset
 apiVersion: apps/v1
 kind: ReplicaSet 
 metadata: 
   name: meu-replicaset
 spec:
-  replicas: 5
+  replicas: 15
   selector:
     matchLabels:
       app: meu-conversao-distancia
